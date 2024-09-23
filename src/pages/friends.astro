@@ -1,0 +1,170 @@
+---
+
+import MainGridLayout from '../layouts/MainGridLayout.astro'
+
+import { getEntry } from 'astro:content'
+import Markdown from '@components/misc/Markdown.astro'
+import I18nKey from '../i18n/i18nKey'
+import { i18n } from '../i18n/translation'
+
+const friendsPost = await getEntry('spec', 'friends')
+
+const { Content } = await friendsPost.render()
+
+const items = [
+  {
+    title: 'Astro',
+    imgurl: 'https://avatars.githubusercontent.com/u/44914786?s=48&v=4',
+    desc: 'The web framework for content-driven websites. ⭐️ Star to support our work!',
+    siteurl: 'https://github.com/withastro/astro',
+    tags: ['框架'],
+  },
+  {
+    title: 'Fuwari',
+    imgurl:
+      'https://github.com/saicaca/fuwari/blob/main/public/favicon/favicon-light-128.png?raw=true',
+    desc: 'A static blog template built with Astro.',
+    siteurl: 'https://github.com/saicaca/fuwari',
+    tags: ['主题'],
+  },
+  {
+    title: '咖啡豆子coffee的小站',
+    imgurl: 'https://blog.kfdzcoffee.cn/upload/mmexport1715001096100.png',
+    desc: '所有奇迹的始发点',
+    siteurl: 'https://blog.kfdzcoffee.cn',
+    tags: [''],
+  },
+  {
+    title: '张洪Heo',
+    imgurl: 'https://bu.dusays.com/2022/12/28/63ac2812183aa.png',
+    desc: '分享设计与科技生活',
+    siteurl: 'https://blog.zhheo.com/',
+    tags: [''],
+  },
+  {
+    title: '竹山一叶',
+    imgurl: 'https://img.zsyyblog.com/favicon.jpg',
+    desc: '来了就不想走的小家',
+    siteurl: 'https://zsyyblog.com',
+    tags: [''],
+  },
+  {
+    title: '珊星雪の小屋',
+    imgurl: 'https://snowtafir.top/img/avatar.webp',
+    desc: '银光渐深星无灭，古杉月空探花雪。浮尘荡风埃不落，杨柳春晨与露飞',
+    siteurl: 'https://snowtafir.top/',
+    tags: [''],
+  },
+  {
+    title: 'Fomalhaut🥝',
+    imgurl: 'https://image.aulypc0x0.online/data/system/error-404.png',
+    desc: 'Future is now 🍭🍭🍭',
+    siteurl: 'https://fomal.cc/',
+    tags: [''],
+  },
+  {
+    title: '安知鱼',
+    imgurl: 'https://npm.elemecdn.com/anzhiyu-blog-static@1.0.4/img/avatar.jpg',
+    desc: '生活明朗，万物可爱',
+    siteurl: 'https://blog.anheyu.com/',
+    tags: [''],
+  },
+  {
+    title: '萌豚 Moechu',
+    imgurl:
+      'https://cravatar.cn/avatar/294fc41a0551cb235455b29356002f46?s=500&r=X',
+    desc: '一个不走心的个人站点',
+    siteurl: 'https://moechu.cn',
+    tags: [''],
+  },
+  {
+    title: '星の野',
+    imgurl: 'https://bu.dusays.com/2023/10/01/6519291503349.jpg',
+    desc: '我自是年少，韶华倾负',
+    siteurl: 'https://byer.top/',
+    tags: [''],
+  },
+  {
+    title: 'CottonCZ',
+    imgurl:
+      'https://raw.githubusercontent.com/CottonCandyZ/blog-t3/main/public/linkAvatar/AvatarSample.webp',
+    desc: 'Just For Fun!',
+    siteurl: 'https://home.nanachi.moe/',
+    tags: [''],
+  },
+  {
+    title: '梦落の小屋',
+    imgurl: 'https://img.mengluo.work/avatar.jpg',
+    desc: '因为不可能，所以才值得相信',
+    siteurl: 'https://blog.dreamfall.cn',
+    tags: [''],
+  },
+  {
+    title: '咸鱼小窝',
+    imgurl: 'https://bu.dusays.com/2023/12/04/656d6235635ef.webp',
+    descr: '我们终将会在没有黑暗的地方相遇',
+    siteurl: 'https://qqquq.com',
+    tags: [''],
+  },
+]
+---
+<MainGridLayout title={i18n(I18nKey.friends)} description={i18n(I18nKey.friends)}>
+    <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
+        <div class="card-base z-10 px-9 py-6 relative w-full ">
+
+<!-- 以下 <Markdown>以上参考La02^的代码实现友链页面-->
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-8 my-4">
+                {items.map((item) => (
+                    <div class="flex flex-nowrap items-stretch h-28 gap-4 rounded-[var(--radius-large)]">
+                        <div class="w-28 h-28 flex-shrink-0 rounded-lg overflow-hidden bg-zinc-200 dark:bg-zinc-900">
+                            <img src={item.imgurl} alt="站点头像" class="w-full h-full object-cover">
+                        </div>
+                        <div class="grow w-full">
+                            <div class="font-bold transition text-lg text-neutral-900 dark:text-neutral-100 mb-1">{item.title}</div>
+                            <div class="text-50 text-sm font-medium">{item.desc}</div>
+                            <div class:list={["items-center", {"flex": true, "hidden md:flex" : false}]}>
+                                <div class="flex flex-row flex-nowrap items-center">
+                                    {(item.tags && item.tags.length > 0) && item.tags.map((tag,i) => (
+                                    <div class:list={[{"hidden": i==0}, "mx-1.5 text-[var(--meta-divider)] text-sm" ]}>
+                                        /
+                                    </div>
+                                    <span class="transition text-50 text-sm font-medium">
+                                        {tag}
+                                    </span>))}
+                                    {!(item.tags && item.tags.length > 0) && <div class="transition text-50 text-sm font-medium">{i18n(I18nKey.noTags)}</div>}
+                                </div>
+                            </div>
+                        </div>
+                        <a href={item.siteurl} target="_blank" rel="noopener noreferrer"class="flex btn-regular w-[3.25rem] rounded-lg bg-[var(--enter-btn-bg)] hover:bg-[var(--enter-btn-bg-hover)] active:bg-[var(--enter-btn-bg-active)] active:scale-95">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="transition text-[var(--primary)] text-4xl mx-auto iconify iconify--material-symbols" width="1em" height="1em" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M12.6 12L8.7 8.1q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275l4.6 4.6q.15.15.213.325t.062.375t-.062.375t-.213.325l-4.6 4.6q-.275.275-.7.275t-.7-.275t-.275-.7t.275-.7z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                ))}
+            </div>
+            <Markdown class="mt-2">
+                <Content />
+            </Markdown>
+        </div>
+    </div>
+
+<!-- giscus评论 -->
+<script src="https://giscus.app/client.js"
+        data-repo="AULyPc/aulypc_fuwari_blog"
+        data-repo-id="R_kgDOMtKjEg"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOMtKjEs4CiPar"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
+
+</MainGridLayout>
