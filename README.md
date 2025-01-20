@@ -1,2 +1,2 @@
 fuwari_blog  
-用来做giscusd的评论  
+用来做giscus的评论  
